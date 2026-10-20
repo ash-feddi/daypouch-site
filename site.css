@@ -27,6 +27,7 @@
   color-scheme: light;
   --moss-900: #1b2a1b;
   --moss-700: #3a4735;
+  --moss-deep: #111b11;
   --cream-100: #f3ebd9;
   --cream-50: #f9f3e7;
   --cream-200: #eae0cd;
@@ -104,8 +105,25 @@ header img {
   width: 136px;
   height: auto;
 }
-.eyebrow {
-  margin: 0 0 16px;
+/* The moss band: header and hero. Evening is moss, so the morning pouch is the one cream thing on it. */
+.band {
+  --ink: var(--cream-100);
+  --ink-muted: var(--sand-300);
+  --focus-ring: var(--cream-100);
+  background: var(--moss-900);
+  color: var(--ink);
+}
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.band img {
+  width: clamp(120px, 14vw, 168px);
+}
+.bar__note {
+  margin: 0;
   font-size: 13px;
   line-height: 18px;
   font-weight: 700;
@@ -113,23 +131,53 @@ header img {
   text-transform: uppercase;
   color: var(--ink-muted);
 }
+.band--hero {
+  position: relative;
+  overflow: hidden;
+}
 .hero {
-  padding-top: 72px;
-  padding-bottom: 96px;
+  position: relative;
+  z-index: 1;
+  padding-top: 24px;
+  padding-bottom: 128px;
 }
 .display {
-  margin: 0 0 32px;
+  margin: 0 0 48px;
   font-family: var(--font-display);
   font-weight: 900;
   font-stretch: 90%;
   text-transform: uppercase;
   letter-spacing: -0.045em;
-  line-height: 0.9;
-  font-size: clamp(64px, 14vw, 144px);
+  line-height: 0.86;
+  font-size: clamp(56px, 15vw, 120px);
+  text-wrap: balance;
+}
+@media (min-width: 768px) {
+  .display {
+    font-size: min(10.2vw, 132px);
+  }
+}
+.hero__grid {
+  display: grid;
+  gap: 56px;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .hero__grid {
+    grid-template-columns: 7fr 5fr;
+    gap: 48px;
+  }
+}
+.hero__lead {
+  margin: 0 0 24px;
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   text-wrap: balance;
 }
 .lede {
-  max-width: 34em;
+  max-width: 32em;
   margin: 0 0 16px;
   font-size: 18px;
   line-height: 27px;
@@ -137,54 +185,151 @@ header img {
 .lede + .lede {
   color: var(--ink-muted);
 }
-.pouches {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  max-width: 560px;
-  margin: 48px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.pouch {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  border-radius: 12px;
-  padding: 24px 20px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-.pouch::before {
-  content: "";
-  position: absolute;
-  inset: 12px 12px auto;
-  height: 12px;
-  border-radius: 4px;
-}
-.pouch b {
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 700;
-}
-.pouch span {
+.hero__meta {
+  margin: 24px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--moss-700);
   font-size: 14px;
   line-height: 20px;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
 }
-.morning {
-  background: var(--cream-50);
-  color: var(--moss-900);
-  box-shadow: inset 0 0 0 1px var(--sand-300);
+/* The next day's number, cut off by the band: tomorrow is already packed. */
+.next {
+  position: absolute;
+  left: calc(var(--gutter) - 0.04em);
+  bottom: -0.42em;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 90%;
+  font-size: clamp(160px, 26vw, 360px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--moss-700);
+  pointer-events: none;
+  user-select: none;
 }
-.morning::before {
-  background: var(--sand-300);
+
+/* Pouches: a sealed sachet with crimped edges, a notch each side, and the label. */
+.pouches {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 16px;
 }
-.evening {
+.pouch {
+  container-type: inline-size;
+  position: relative;
+  flex: 0 1 340px;
+  aspect-ratio: 5 / 6.6;
+  padding: 4.5%;
+  border-radius: 6px;
+  box-shadow:
+    0 2px 2px rgba(0, 0, 0, 0.18),
+    0 28px 48px -12px rgba(0, 0, 0, 0.55);
+}
+.pouch::before,
+.pouch::after {
+  content: "";
+  position: absolute;
+  top: 14%;
+  width: 4%;
+  aspect-ratio: 1;
+  border-radius: 50%;
   background: var(--moss-900);
+}
+.pouch::before {
+  left: -2%;
+}
+.pouch::after {
+  right: -2%;
+}
+.is-morning {
+  z-index: 1;
+  transform: rotate(-4deg) translateY(4%);
+  margin-right: -1%;
+  background:
+    repeating-linear-gradient(90deg, rgba(27, 42, 27, 0.07) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(0deg, rgba(27, 42, 27, 0.07) 0 1px, transparent 1px 4px), var(--cream-200);
+  color: var(--moss-900);
+}
+.is-evening {
+  transform: rotate(3deg);
+  background:
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 4px), var(--moss-700);
   color: var(--cream-100);
 }
-.evening::before {
-  background: var(--moss-700);
+.pouch__face {
+  position: relative;
+  height: 100%;
+  padding: 10% 9% 8% 11%;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.is-morning .pouch__face {
+  background: linear-gradient(160deg, var(--cream-50) 0%, var(--cream-100) 55%, var(--cream-200) 100%);
+}
+.is-evening .pouch__face {
+  background: linear-gradient(160deg, #24382a 0%, var(--moss-900) 55%, var(--moss-deep) 100%);
+}
+.pouch__face p {
+  margin: 0;
+}
+.band .pouch__mark {
+  width: 62%;
+  height: auto;
+  margin-bottom: 9%;
+}
+.pouch__for {
+  font-size: 7.5cqi;
+  line-height: 1.3;
+  padding-bottom: 3%;
+  border-bottom: 1px solid currentColor;
+  width: 70%;
+}
+.pouch__occ {
+  margin-top: 5% !important;
+  font-size: 6cqi;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pouch__day {
+  margin-top: auto !important;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 90%;
+  font-size: 60cqi;
+  line-height: 0.82;
+  letter-spacing: -0.05em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.pouch__date {
+  margin-top: 4% !important;
+  font-size: 5.2cqi;
+  line-height: 1.3;
+  font-weight: 700;
+}
+.pouch__list {
+  margin-top: 2% !important;
+  font-size: 4.6cqi;
+  line-height: 1.35;
+  opacity: 0.85;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pouch {
+    transition: transform 640ms cubic-bezier(0.22, 0.8, 0.24, 1);
+  }
+  .is-morning:hover {
+    transform: rotate(-5deg) translateY(1%);
+  }
+  .is-evening:hover {
+    transform: rotate(4deg) translateY(-3%);
+  }
 }
 section {
   padding: 72px 0;

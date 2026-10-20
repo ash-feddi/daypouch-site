@@ -61,22 +61,49 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header>
-  <div class="wrap">
-    <a href="/" aria-label="Daypouch home"><img src="/img/wordmark-moss.svg" alt="daypouch" width="136" height="30"></a>
+<header class="band">
+  <div class="wrap bar">
+    <a href="/" aria-label="Daypouch home"><img src="/img/wordmark-cream.svg" alt="daypouch" width="168" height="37"></a>
+    <p class="bar__note">Coming soon to the UAE</p>
   </div>
 </header>
 
 <main id="main">
+  <div class="band band--hero">
   <div class="hero wrap">
-    <p class="eyebrow">Coming soon to the UAE</p>
     <h1 class="display">One less thing.</h1>
-    <p class="lede">Daypouch packs the supplements you already take into one sealed pouch for each time of day. Each pouch carries your name, the date and every supplement inside.</p>
-    <p class="lede">One box for each calendar month, arriving before the 1st. Founding memberships open soon.</p>
-    <ul class="pouches" aria-label="The two pouches">
-      <li class="pouch morning"><b>Morning</b><span>Every day</span></li>
-      <li class="pouch evening"><b>Evening</b><span>Every day</span></li>
-    </ul>
+    <div class="hero__grid">
+      <div class="pouches" role="img" aria-label="Two Daypouch pouches for a member called Noor: Morning and Evening, day 01, each label listing the supplements inside.">
+        <div class="pouch is-morning" aria-hidden="true">
+          <div class="pouch__face">
+            <img class="pouch__mark" src="/img/wordmark-moss.svg" alt="" width="120" height="26">
+            <p class="pouch__for">For Noor</p>
+            <p class="pouch__occ">Morning</p>
+            <p class="pouch__day">01</p>
+            <p class="pouch__date">Friday · January</p>
+            <p class="pouch__list">Fish oil ×2 · D3 + K2 · Vitamin C · Zinc · B12</p>
+          </div>
+        </div>
+        <div class="pouch is-evening" aria-hidden="true">
+          <div class="pouch__face">
+            <img class="pouch__mark" src="/img/wordmark-cream.svg" alt="" width="120" height="26">
+            <p class="pouch__for">For Noor</p>
+            <p class="pouch__occ">Evening</p>
+            <p class="pouch__day">01</p>
+            <p class="pouch__date">Friday · January</p>
+            <p class="pouch__list">Probiotic · Magnesium ×2</p>
+          </div>
+        </div>
+      </div>
+      <div class="hero__copy">
+        <p class="hero__lead">Your supplements, packed for your day.</p>
+        <p class="lede">Daypouch packs the supplements you already take into one sealed pouch for each time of day. Each pouch carries your name, the date and every supplement inside.</p>
+        <p class="lede">One box for each calendar month, arriving before the 1st. Founding memberships open soon.</p>
+        <p class="hero__meta">Morning + Evening · one box a month</p>
+      </div>
+    </div>
+  </div>
+  <p class="next" aria-hidden="true">02</p>
   </div>
 
   <section id="contact" aria-labelledby="contact-h">
